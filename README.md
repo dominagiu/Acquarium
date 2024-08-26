@@ -2,13 +2,11 @@
 
 ## Overview
 
-**Acquarium** is an early detection system based on deep learning techniques. This project focuses on analyzing seismic data to predict volcanic events, particularly in the Etna region. The pipeline includes data collection, cleaning, and modeling to improve the accuracy of predicting paroxysmal events.
-
+**Acquarium** is an early detection system based on deep learning techniques. This project focuses on analyzing vulcaninc data to predict volcanic events, particularly in the Etna region. 
 ## Project Structure
 
 - **notebooks/**: Jupyter notebooks for data processing and model experimentation with output.
 - **tuning/**: Scripts for tuning deep learning models.
-- **reports/**: Documentation and quarterly reports on project progress.
 
 ## Check
 
