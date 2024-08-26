@@ -6,8 +6,9 @@
 ## Project Structure
 
 - **notebooks/**: Jupyter notebooks for data processing and model experimentation with output.
+  - **models_metrics/**: csv with the output of the models
 - **tuning/**: Scripts for tuning deep learning models.
-
+  - **output/**: csv with the output of the tuning models
 ## Check
 
 Check the notebooks in the `notebooks/` directory to see the performance analyses of each model.
