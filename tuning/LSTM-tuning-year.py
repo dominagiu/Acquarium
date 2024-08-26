@@ -7,7 +7,7 @@ import pandas as pd
 import numpy as np
 import os
 
-# Set the output directory
+
 output_directory = 'output_files'
 os.makedirs(output_directory, exist_ok=True)
 
@@ -34,8 +34,8 @@ def calculate_metrics(actual, predicted):
     false_positives = 0
     false_negatives = 0
     lead_times = []
-    correct_alert_time = 0  # Tempo di allerta corretto
-    total_alert_time = 0  # Tempo totale di allerta
+    correct_alert_time = 0  
+    total_alert_time = 0  
 
     for pred_start, pred_end in predicted:
         pred_start, pred_end = pd.to_datetime(pred_start), pd.to_datetime(pred_end)
@@ -48,7 +48,7 @@ def calculate_metrics(actual, predicted):
         if len(overlapping_events) > 0:
             true_positives += 1
             lead_time = (pred_start - pd.to_datetime(overlapping_events[0, 0])).total_seconds() / 3600  # lead time in hours
-            if lead_time <= 4:  # Considera solo lead time <= 4 ore
+            if lead_time <= 4: 
                 lead_times.append(lead_time)
             
             # Calcola il tempo di allerta corretto
@@ -129,7 +129,7 @@ for year_of_interest in years_of_interest:
     # Loop through each validation year separately
     for validation_year in years_of_interest:
         if validation_year == year_of_interest:
-            continue  # Skip the training year
+            continue  
 
         print(f"Validating on Year: {validation_year}")
 
@@ -177,10 +177,10 @@ for year_of_interest in years_of_interest:
         TPR, FDR, FTA, avg_lead_time = calculate_metrics(actual_events, predicted_events)
         metrics_across_years.append((year_of_interest, validation_year, TPR, FDR, FTA, avg_lead_time))
 
-    # Convert metrics to DataFrame and save as CSV
+
     metrics_df = pd.DataFrame(metrics_across_years, columns=['Train Year', 'Validation Year', 'TPR', 'FDR', 'FTA', 'Avg_Lead_Time'])
     print(metrics_df)
 
-    # Save the metrics to a CSV file for this year's model
+    # Save the metrics
     metrics_df.to_csv(os.path.join(output_directory, f'metrics_for_{year_of_interest}.csv'), index=False)
 
