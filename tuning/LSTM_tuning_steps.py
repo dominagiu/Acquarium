@@ -12,7 +12,7 @@ from tensorflow.keras import backend as K
 
 # Funzione per calcolare la media escludendo valori 0 e lead time > 4 ore
 def mean_excluding_zeros_and_large_lead_times(values):
-    filtered_values = [v for v in values if v != 0 and v <= 4]  # Escludi lead time > 4 ore
+    filtered_values = [v for v in values if v != 0 and v <= 4]
     if len(filtered_values) > 0:
         return np.mean(filtered_values)
     else:
@@ -24,8 +24,8 @@ def calculate_metrics(actual, predicted):
     false_positives = 0
     false_negatives = 0
     lead_times = []
-    correct_alert_time = 0  # Tempo di allerta corretto
-    total_alert_time = 0  # Tempo totale di allerta
+    correct_alert_time = 0  
+    total_alert_time = 0  
 
     for pred_start, pred_end in predicted:
         pred_start, pred_end = pd.to_datetime(pred_start), pd.to_datetime(pred_end)
@@ -37,8 +37,8 @@ def calculate_metrics(actual, predicted):
 
         if len(overlapping_events) > 0:
             true_positives += 1
-            lead_time = (pred_start - pd.to_datetime(overlapping_events[0, 0])).total_seconds() / 3600  # lead time in hours
-            if lead_time <= 4:  # Considera solo lead time <= 4 ore
+            lead_time = (pred_start - pd.to_datetime(overlapping_events[0, 0])).total_seconds() / 3600
+            if lead_time <= 4:  
                 lead_times.append(lead_time)
             
             # Calcola il tempo di allerta corretto
@@ -313,10 +313,9 @@ for timesteps in timesteps_range:
                 best_params['future_steps'] = future_steps
                 best_params['threshold'] = threshold
 
-# Salva tutte le metriche in un file CSV finale
+# Salva tutte le metriche
 metrics_df.to_csv('model_metrics_final.csv', index=False)
 
-# Stampa dei risultati migliori
 print("Migliori parametri trovati:")
 print(f"Timesteps: {best_params['timesteps']}")
 print(f"Future Steps: {best_params['future_steps']}")
